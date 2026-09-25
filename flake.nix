@@ -38,12 +38,14 @@
 
             installPhase = ''
               runHook preInstall
-              mkdir -p $out/dist
+              mkdir -p $out/dist/translations
               cp package.json $out/
               cp dist/presets.min.json dist/fields.min.json \
                  dist/preset_categories.min.json dist/preset_defaults.min.json \
                  dist/deprecated.min.json dist/discarded.min.json \
                  $out/dist/
+              cp ${pkgs.writeText "translations-index.min.json" "{}"} \
+                 $out/dist/translations/index.min.json
               runHook postInstall
             '';
           };
