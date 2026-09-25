@@ -33,6 +33,7 @@
             buildPhase = ''
               runHook preBuild
               npm run dist --offline
+              node scripts/generate-en.cjs
               runHook postBuild
             '';
 
@@ -44,8 +45,8 @@
                  dist/preset_categories.min.json dist/preset_defaults.min.json \
                  dist/deprecated.min.json dist/discarded.min.json \
                  $out/dist/
-              cp ${pkgs.writeText "translations-index.min.json" "{}"} \
-                 $out/dist/translations/index.min.json
+              cp dist/translations/en.min.json $out/dist/translations/en.min.json
+              cp dist/translations/index.min.json $out/dist/translations/index.min.json
               runHook postInstall
             '';
           };
